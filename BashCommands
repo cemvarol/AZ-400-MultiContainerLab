@@ -7,16 +7,18 @@ B=${A:$(echo `expr index "$A" @`)}
 C=${B:: -24}
 AksName=$(echo "$C"aksc01)
 AcrName=$(echo "$C"acr01)
-DbSrv=$(echo "$C"aksdb01)
+DbSrv=$(echo "$C"aksdbs01)
 RG=akshandsonlab
 L=EastUS
-
+user=sqladmin
+pass=1q2w3e4r5t6y*
 
 version=$(az aks get-versions -l $L --query 'orchestrators[-1].orchestratorVersion' -o tsv)
 
 az group create --name $RG --location $L
 
 az aks create --resource-group $RG --name $AksName --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location $L
+
 
 az acr create --resource-group $RG --name $AcrName --sku Standard --location $L
 
@@ -34,10 +36,36 @@ ACR_ID=$(az acr show --name $ACR_NAME --resource-group $ACR_RESOURCE_GROUP --que
 
 az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
 
-az sql server create -l eastus -g $AKS_RESOURCE_GROUP -n $DbSrv -u sqladmin -p 1q2w3e4r5t6y*
+az sql server create -l eastus -g $AKS_RESOURCE_GROUP -n $DbSrv -u $user -p $pass
 
 az sql db create -g $AKS_RESOURCE_GROUP -s $DbSrv -n mhcdb --service-objective S0
 
 
 
-#by cem varol
+echo Your ACR name under variables is $AcrName".azurecr.io
+
+echo "Your Sql user name is $user"
+
+echo "Your Sql Password is $pass"
+
+echo "Your Sql Server name is $DbSrv.database.windows.net"
+
+echo "Your Database name is mhcdb"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
