@@ -38,3 +38,8 @@ az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
 az sql server create -l eastus -g $AKS_RESOURCE_GROUP -n $DbSrv -u sqladmin -p 1q2w3e4r5t6y*
 
 az sql db create -g $AKS_RESOURCE_GROUP -s $DbSrv -n mhcdb --service-objective S0
+
+
+
+
+
