@@ -16,10 +16,9 @@ version=$(az aks get-versions -l $L --query 'orchestrators[-1].orchestratorVersi
 
 az group create --name $RG --location $L
 
-az aks create --resource-group akshandsonlab --name $AksName --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location $L
+az aks create --resource-group $RG --name $AksName --enable-addons monitoring --kubernetes-version $version --generate-ssh-keys --location $L
 
-
-az acr create --resource-group akshandsonlab --name $AcrName --sku Standard --location $L
+az acr create --resource-group $RG --name $AcrName --sku Standard --location $L
 
 
 AKS_RESOURCE_GROUP=$(echo "$RG")
@@ -27,7 +26,7 @@ AKS_CLUSTER_NAME=$(echo "$AksName")
 ACR_RESOURCE_GROUP=$(echo "$RG")
 ACR_NAME=$(echo "$AcrName")
 
-az acr create --resource-group akshandsonlab --name $AcrName --sku Standard --location eastus
+
 
 CLIENT_ID=$(az aks show --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME --query "servicePrincipalProfile.clientId" --output tsv)
 
@@ -41,5 +40,4 @@ az sql db create -g $AKS_RESOURCE_GROUP -s $DbSrv -n mhcdb --service-objective S
 
 
 
-
-
+#by cem varol
