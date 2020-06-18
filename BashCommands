@@ -9,7 +9,7 @@ AksName=$(echo "$C"aksc01)
 AcrName=$(echo "$C"acr01)
 DbSrv=$(echo "$C"aksdbs01)
 RG=akshandsonlab
-L=EastUS
+L=westus
 user=sqladmin
 pass=1q2w3e4r5t6y*
 
