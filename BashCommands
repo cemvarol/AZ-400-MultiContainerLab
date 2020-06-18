@@ -43,7 +43,7 @@ az sql db create -g $AKS_RESOURCE_GROUP -s $DbSrv -n mhcdb --service-objective S
 
 
 
-echo -e "\nPlease take a note of these \nYour Resource Group Name is $RG \nYour ACR name is "$AcrName".azurecr.io \nYour Sql user name is $user \nYour Sql Password is $pass \nYour Sql Server name is $DbSrv.database.windows.net \nYour Database name is mhcdb \nYour AKSname is $AksName"
+echo -e "\nPlease take a note of these \nYour Resource Group Name is $RG \nYour ACR name is "$AcrName".azurecr.io \nYour Sql user name is $user \nYour Sql Password is $pass \nYour Sql Server name is $DbSrv.database.windows.net \nYour Database name is mhcdb \nYour AKSname is $AksName\n"
 
 
 
