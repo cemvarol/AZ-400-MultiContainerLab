@@ -36,7 +36,7 @@ ACR_ID=$(az acr show --name $ACR_NAME --resource-group $ACR_RESOURCE_GROUP --que
 
 az role assignment create --assignee $CLIENT_ID --role acrpull --scope $ACR_ID
 
-az sql server create -l eastus -g $AKS_RESOURCE_GROUP -n $DbSrv -u $user -p $pass
+az sql server create -l $L -g $AKS_RESOURCE_GROUP -n $DbSrv -u $user -p $pass
 
 az sql db create -g $AKS_RESOURCE_GROUP -s $DbSrv -n mhcdb --service-objective S0
 
