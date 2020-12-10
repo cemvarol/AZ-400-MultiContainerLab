@@ -29,8 +29,15 @@ ACR_RESOURCE_GROUP=$(echo "$RG")
 ACR_NAME=$(echo "$AcrName")
 
 
+az ad sp create-for-rbac -n msi
 
-CLIENT_ID=$(az aks show --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME --query "servicePrincipalProfile.clientId" --output tsv)
+sp=msi
+
+az ad sp list --filter "displayName eq '$sp'" --query '[].{appId:appId}' -o tsv
+
+#CLIENT_ID=$(az aks show --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME --query "servicePrincipalProfile.clientId" --output tsv)
+
+CLIENT_ID=$(az ad sp list --filter "displayName eq '$sp'" --query '[].{appId:appId}' -o tsv)
 
 ACR_ID=$(az acr show --name $ACR_NAME --resource-group $ACR_RESOURCE_GROUP --query "id" --output tsv)
 
@@ -41,24 +48,13 @@ az sql server create -l eastus -g $AKS_RESOURCE_GROUP -n $DbSrv -u $user -p $pas
 az sql db create -g $AKS_RESOURCE_GROUP -s $DbSrv -n mhcdb --service-objective S0
 
 
-
-
-echo -e "\nPlease take a note of these \nYour Resource Group Name is $RG \nYour ACR name is "$AcrName".azurecr.io \nYour Sql user name is $user \nYour Sql Password is $pass \nYour Sql Server name is $DbSrv.database.windows.net \nYour Database name is mhcdb \nYour AKSname is $AksName\n"
+az aks update -n $AksName -g $RG --attach-acr $AcrName
 
 #
 
 
+echo -e "\nPlease take a note of these \nYour Resource Group Name is $RG \nYour ACR name is "$AcrName".azurecr.io \nYour Sql user name is $user \nYour Sql Password is $pass \nYour Sql Server name is $DbSrv.database.windows.net \nYour Database name is mhcdb \nYour AKSname is $AksName\n"
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+#
